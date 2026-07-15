@@ -6,11 +6,11 @@ import { changePassword, deleteProfile, getProfile, updateProfile } from '../con
 import { authMiddleware } from '../middlewares/authMiddleware.js';
 
 
-const userRoute = express();
+const route = express();
 
-userRoute.get("/",authMiddleware,getProfile);
-userRoute.put("/update-profile",authMiddleware,updateProfile);
-userRoute.delete("/delete-profile",authMiddleware,deleteProfile);
-userRoute.put("/change-password",authMiddleware,changePassword);
+route.get("/",authMiddleware,getProfile);
+route.put("/update-profile",authMiddleware,updateProfile);
+route.delete("/delete-profile",authMiddleware,deleteProfile);
+route.put("/change-password",authMiddleware,changePassword);
 
-export default userRoute;
+export default route;

@@ -1,15 +1,15 @@
 import express from 'express';
-import { cancelOrder, createOrder, getMyOrders, getOrderById } from '../controllers/orderController';
-import { authMiddleware } from '../middlewares/authMiddleware';
+import { cancelOrder, createOrder, getMyOrders, getOrderById } from '../controllers/orderController.js';
+import { authMiddleware } from '../middlewares/authMiddleware.js';
 
 
-const orderRoute = express();
-orderRoute.post("/", authMiddleware, createOrder);
-orderRoute.get("/my-orders", authMiddleware, getMyOrders);
-orderRoute.get("/:orderId", authMiddleware, getOrderById);
-orderRoute.put("/cancel/:orderId", authMiddleware, cancelOrder);
+const route = express();
+route.post("/", authMiddleware, createOrder);
+route.get("/my-orders", authMiddleware, getMyOrders);
+route.get("/:orderId", authMiddleware, getOrderById);
+route.put("/cancel/:orderId", authMiddleware, cancelOrder);
 
 
 
 
-export default orderRoute;
+export default route;

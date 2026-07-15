@@ -2,22 +2,22 @@ import express from 'express';
 import { addToCart, cleanCart, getCart, removeCartItem, updateCartItem } from '../controllers/cartController.js';
 import { authMiddleware } from '../middlewares/authMiddleware.js';
 
-const cartRoute = express.Router();
+const route = express.Router();
 
-cartRoute.use(express.json());
+route.use(express.json());
 
-cartRoute.post("/add", authMiddleware, addToCart);
+route.post("/add", authMiddleware, addToCart);
 
 // Get logged-in user's cart
-cartRoute.get("/", authMiddleware, getCart);
+route.get("/", authMiddleware, getCart);
 
 // Update quantity of a cart item
-cartRoute.put("/item/:cartItemId", authMiddleware, updateCartItem);
+route.put("/item/:cartItemId", authMiddleware, updateCartItem);
 
 // Remove one item from cart
-cartRoute.delete("/item/:cartItemId", authMiddleware, removeCartItem);
+route.delete("/item/:cartItemId", authMiddleware, removeCartItem);
 
 // Clear all items from cart
-cartRoute.delete("/clear", authMiddleware, cleanCart);
+route.delete("/clear", authMiddleware, cleanCart);
 
-export default cartRoute;
+export default route;

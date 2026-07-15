@@ -1,13 +1,25 @@
+/**
+ * @swagger
+ * /test:
+ *   get:
+ *     summary: Test API
+ *     tags:
+ *       - Test
+ *     responses:
+ *       200:
+ *         description: Working
+ */
 import express from 'express';
-import { deleteUser, getAllUsers, getDashboardStats, getUserById, updateUserRole } from '../controllers/adminController';
+import { deleteUser, getAllUsers, getDashboardStats, getUserById, updateUserRole } from '../controllers/adminController.js';
+import { authMiddleware } from '../middlewares/authMiddleware.js';
 
 
-const adminRoute = express();
+const route = express();
 
-adminRoute.get("/dashboard",getDashboardStats);
-adminRoute.get("/users/:userId", getUserById);
-adminRoute.get("/users", getAllUsers);
-adminRoute.put("/users/:userId/userRole", updateUserRole);
-adminRoute.delete("/users/:userId", deleteUser);
+route.get("/dashboard",authMiddleware, getDashboardStats);
+route.get("/users/:userId",authMiddleware, getUserById);
+route.get("/users",authMiddleware, getAllUsers);
+route.put("/users/:userId/userRole",authMiddleware, updateUserRole);
+route.delete("/users/:userId",authMiddleware, deleteUser);
 
-export default adminRoute;
+export default route;
